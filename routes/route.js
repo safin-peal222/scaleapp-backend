@@ -14,6 +14,8 @@ router.post('/check-authentication',LoginController.check);
 router.post('/upload',ProductController.uploadProduct);
 router.get('/getproducts',ProductController.getProducts);
 router.post('/getdetails',ProductController.details);
+router.post('/deleteproduct',ProductController.delete);
+router.post('/updateproduct',ProductController.update);
 
 //Notification
 router.post('/contactinfo',ContactController.createContact);

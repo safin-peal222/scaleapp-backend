@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const Admin = require('../models/Admin');
-const key = process.env.JWT_secret;
+const key = process.env.JWT_SECRET;
 exports.login=async(req,res)=>{
     const email = req.body.email;
     const password = req.body.password;
