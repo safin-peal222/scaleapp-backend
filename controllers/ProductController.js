@@ -50,6 +50,12 @@ exports.getProducts =async(req,res)=>{
     })
 }
 
+exports.getTopProducts =async(req,res)=>{
+    await productDB.find({top:true}).then(response=>{
+        res.send(response);
+    })
+}
+
 exports.details = async(req,res)=>{
     const id = req.body.id;
     const details = await productDB.findById(id).exec();
@@ -77,4 +83,23 @@ exports.delete=async(req,res)=>{
         res.send(response);
     })
 }
-exports.update=async(req,res)=>{}
+exports.update=async(req,res)=>{
+    const id = req.body.id;
+    const data ={
+        name:req.body.name,
+        category:req.body.cat,
+        madeIn:req.body.madeIn,
+        top:req.body.top,
+    }
+    productDB.findByIdAndUpdate(id,data,{new:true},(err,result)=>{
+      if(err)
+      {
+        res.send(err);
+      }
+      else
+      {
+        res.send(result);
+      }
+
+    })
+}
