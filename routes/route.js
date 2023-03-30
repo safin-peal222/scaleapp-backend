@@ -5,6 +5,8 @@ const ProductController = require('../controllers/ProductController');
 const LoginController = require('../controllers/LoginController')
 const CarouselController = require('../controllers/CarouselController')
 const EmployeeController = require('../controllers/EmployeeController')
+const  {checkAuthentication}= require('../middleware/checkAuth');
+
 
 //Authentication
 router.post('/login',LoginController.login);
@@ -31,8 +33,8 @@ router.post('/delete',CarouselController.delete);
 router.get('/carousel-image',CarouselController.get);
 
 //Employee
-router.post('/add-employee',EmployeeController.store);
-router.post('/delete-employee',EmployeeController.delete);
+router.post('/add-employee',checkAuthentication,EmployeeController.store);
+router.post('/delete-employee',checkAuthentication,EmployeeController.delete);
 router.get('/get-employee',EmployeeController.get);
 
 module.exports=router;

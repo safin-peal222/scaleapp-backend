@@ -1,6 +1,7 @@
 const employeeDB = require('../models/Employee');
 const fs = require('fs');
 
+
 exports.get=async(req,res)=>{
     await employeeDB.find().then(response=>{
         res.send(response);
@@ -13,7 +14,7 @@ exports.store=async(req,res)=>{
     image.mv(`${process.cwd()}/public/employee/${imageName}`);
     const result = new employeeDB({name:req.body.name,phone:req.body.phone, designation:req.body.designation,image:imageName});
     await result.save().then(response=>{
-        res.send(response);
+        res.send({response,status:200});
     })
     
 }
@@ -24,9 +25,9 @@ exports.delete=async(req,res)=>{
        await employeeDB.deleteOne({_id:id}).then(response=>{
         fs.unlink('public/employee/'+imageName,err=>{
             if(err)
-              res.send(response)
+              res.send(err);
             else
-              res.send(response);
+              res.send({status:200});
         });
     })
 }
