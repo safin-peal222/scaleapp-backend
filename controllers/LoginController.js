@@ -25,7 +25,7 @@ exports.check = async(req,res)=>{
             res.send('not valid');
         }
         else{ 
-            res.send(decoded)
+            res.send(decoded);
         }
     })
 }

@@ -8,7 +8,7 @@ exports.store=async(req,res)=>{
 
     const result = new carouselDB({imageUrl:imageName});
     await result.save().then(response=>{
-        res.send(response);
+        res.send({response,status:200});
     })
     //res.send(imageName);
 }
@@ -22,7 +22,7 @@ exports.delete=async(req,res)=>{
             if(err)
               res.send('not found')
             else
-              res.send(response);
+              res.send({response,status:200});
         });
     })
 }

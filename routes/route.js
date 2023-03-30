@@ -13,12 +13,13 @@ router.post('/login',LoginController.login);
 router.post('/check-authentication',LoginController.check);
 
 //Product
-router.post('/upload',ProductController.uploadProduct);
+router.post('/upload',checkAuthentication,ProductController.uploadProduct);
+router.post('/deleteproduct',checkAuthentication,ProductController.delete);
+router.post('/updateproduct',checkAuthentication,ProductController.update);
 router.get('/getproducts',ProductController.getProducts);
 router.get('/gettopproducts',ProductController.getTopProducts);
 router.post('/getdetails',ProductController.details);
-router.post('/deleteproduct',ProductController.delete);
-router.post('/updateproduct',ProductController.update);
+
 
 
 //Notification
@@ -28,8 +29,8 @@ router.post('/contactdelete',ContactController.deleteContact);
 
 
 //Carousel
-router.post('/add-image',CarouselController.store);
-router.post('/delete',CarouselController.delete);
+router.post('/add-image',checkAuthentication,CarouselController.store);
+router.post('/delete',checkAuthentication,CarouselController.delete);
 router.get('/carousel-image',CarouselController.get);
 
 //Employee

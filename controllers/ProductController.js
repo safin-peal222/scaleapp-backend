@@ -37,7 +37,7 @@ exports.uploadProduct = async(req,res)=>{
     }
     const result = new productDB(data);
     await result.save().then(response=>{
-        res.send(response);
+        res.send({response,status:200});
     })
     .catch(err=>{
         res.send(err);
@@ -80,7 +80,7 @@ exports.delete=async(req,res)=>{
                 //res.send(err);
             });
         })
-        res.send(response);
+        res.send({response,status:200});
     })
 }
 exports.update=async(req,res)=>{
@@ -98,7 +98,7 @@ exports.update=async(req,res)=>{
       }
       else
       {
-        res.send(result);
+        res.send({result,status:200});
       }
 
     })
