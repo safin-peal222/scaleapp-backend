@@ -85,11 +85,40 @@ exports.delete=async(req,res)=>{
 }
 exports.update=async(req,res)=>{
     const id = req.body.id;
+    const product = await productDB.findById(id).exec();
+    //console.log(product);
+    var imageName='';
+    var pdfName='';
+    if(req.files.file){
+        fs.unlink('public/images/'+product.image,err=>{
+        });
+        const image = req.files.file;
+        imageName=Date.now()+'-'+image.name;
+        //console.log(imageName);
+        image.mv(`${process.cwd()}/public/images/${imageName}`);
+    }
+    else{
+        imageName = product.image;
+    }
+    if(req.files.pdf){
+        fs.unlink('public/pdf/'+product.pdf,err=>{
+            //res.send(err);
+        });
+        const pdf= req.files.pdf;
+        pdfName = Date.now()+'_'+pdf.name;
+        pdf.mv(`${process.cwd()}/public/pdf/${pdfName}`);
+    }
+    else
+    {
+        pdfName = product.pdf;
+    }
     const data ={
         name:req.body.name,
         category:req.body.cat,
         madeIn:req.body.madeIn,
         top:req.body.top,
+        image:imageName,
+        pdf:pdfName
     }
     productDB.findByIdAndUpdate(id,data,{new:true},(err,result)=>{
       if(err)

@@ -9,7 +9,7 @@ const checkAuthentication=(req,res,next)=>{
     }
     else
     {
-        console.log(decoded);
+        //console.log(decoded);
         next();
     }
  })
