@@ -22,6 +22,7 @@ router.post('/getdetails',ProductController.details);
 
 
 
+
 //Notification
 router.post('/contactinfo',ContactController.createContact);
 router.get('/notification',ContactController.getContact);
